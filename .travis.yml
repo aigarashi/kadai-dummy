@@ -1,0 +1,9 @@
+language: java
+cache:
+  directories:
+    - $HOME/lib
+script:
+    - mkdir -p $HOME/lib
+    - test -r $HOME/lib/objectdrawV1.2.0ku.jar || wget -P $HOME/lib https://www.fos.kuis.kyoto-u.ac.jp/~igarashi/tmp/objectdrawV1.2.0ku.jar
+    - if [ `grep ^project.charset=windows-31j package.bluej` ]; then ENCODING=shift-jis; else ENCODING=utf-8; fi
+    - javac -encoding $ENCODING -cp .:$HOME/lib/objectdrawV1.2.0ku.jar *.java
